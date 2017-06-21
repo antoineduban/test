@@ -4,6 +4,9 @@ var rp = require('request-promise');
 const apiKey = "d696848d09ec48a78695333b5798950f"
 
 module.exports = {
+  postGif: function(req, res) {
+
+  },
   queryGif: function(req, res) {
     request("http://api.giphy.com/v1/gifs/search?q="+ req.query.query +"&limit=20&api_key=" + apiKey, function(error, response, body) {
       if (error != null) {
