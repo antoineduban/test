@@ -1,6 +1,6 @@
 const express = require('express')
-var bodyParser = require('body-parser')
-var jsonParser = bodyParser.json()
+const bodyParser = require('body-parser')
+const jsonParser = bodyParser.json()
 const app = express()
 
 const gif = require("./src/gif");
@@ -16,32 +16,29 @@ init()
 
 app.get('/api/emojis/search/', (req, res) => {
   result = emojis.query(req.query.query);
-  if (result.length == 0) {
-    res.status(204).send("No emojis found");
-  } else {
-    res.send(result);
-  }
+  res.send(result);
 })
+
 app.get('/api/gifs/search/', function (req, res) {
-    gif.queryGif(req, res)
+  gif.queryGif(req.query.query, res)
 })
 
 app.post('/api/gifs/favorites/',jsonParser, function (req, res) {
-    favorites.post(req, res)
+  favorites.post(req, res)
 })
 
 app.post('/api/emojis/favorites/',jsonParser, function (req, res) {
-    favorites.post(req, res)
+  favorites.post(req, res)
 })
 
 app.get('/api/gifs/favorites/', function (req, res) {
-   favorites.getGifs(req, res)
+  favorites.getGifs(req, res)
 })
 
 app.get('/api/emojis/favorites/', function (req, res) {
-   favorites.getEmojis(req, res)
+  favorites.getEmojis(req, res)
 })
 
 app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+  console.log('GIFS/Emojis test')
 })

@@ -1,9 +1,9 @@
 var sqlite3 = require('sqlite3').verbose()
-var db = new sqlite3.Database(':memory:')
+var db = new sqlite3.Database('mydb.db')
 
 module.exports = {
   init: function() {
-    db.run('CREATE TABLE favorites (user_id TEXT PRIMARY KEY, gifs TEXT, emojis TEXT)')
+    db.run('CREATE TABLE if not exists favorites (user_id TEXT PRIMARY KEY, gifs TEXT, emojis TEXT)')
   },
   post: function(req, res) {
     if (req.body.type == undefined || req.body.id == undefined || req.body.meta == undefined || req.body.meta.url == undefined)
